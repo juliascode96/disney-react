@@ -3,3 +3,14 @@
     align-items: center;
     justify-content: space-around;
 }
+
+.container-section-list .swiper-pagination {
+    bottom: 0px;
+}
+
+.container-section-list .swiper {
+    padding-bottom: 25px;
+}
+.swiper {
+    overflow: inherit !important; 
+}
