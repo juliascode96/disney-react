@@ -6,16 +6,38 @@ import "swiper/css/pagination";
 import { Pagination } from "swiper";
 import getMovies from "../services/Get.service";
 import { useState, useEffect } from 'react'
+import SnackbarMessage from "../SnackbarMessage/SnackbarMessage";
 
 const Listado = () => {
 
     const [movies, setMovies] = useState([])
+    const [showMessage, setShowMessage] = useState({
+        status: false,
+        message: '',
+        type: ''
+    });
+
+    const { status, message, type } = showMessage
     
     useEffect( () => {
         getMovies().then( (res) => {
                 setMovies(res.data.results)
             })
+            .catch((err) => {
+                setShowMessage({
+                    status: true,
+                    message: 'Ocurrio un error en la lllamada',
+                    type: 'error'
+                })
+            })
         }, [])
+
+        const handleClose = () => {
+            setShowMessage({
+                ...showMessage,
+                status: false
+            })
+        }
     
     return(
         <div className="container-section-list">
@@ -40,6 +62,12 @@ const Listado = () => {
                     )
                 })}
             </Swiper>
+            <SnackbarMessage 
+                status={status}
+                handleClose={handleClose}
+                type={type}
+                message={message}
+            />
         </div>
     )
 }

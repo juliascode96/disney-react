@@ -4,6 +4,7 @@ import HomePage from '../../Pages/HomePage'
 import ListPage from '../../Pages/ListPage'
 import Header from '../Header'
 import Footer from '../Footer'
+import DetailsPage from '../../Pages/DetailsPage'
 
 const AppRouter = () => {
 
@@ -14,6 +15,7 @@ const AppRouter = () => {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/home" element={<HomePage />} />
                 <Route path="/listado" element={<ListPage />} />
+                <Route path="/movie/:id" element={<DetailsPage/>} />
             </Routes>
             <Footer />
         </BrowserRouter>

@@ -1,14 +1,9 @@
-import { useState , forwardRef } from 'react';
+import { useState } from 'react';
 import Button from '@mui/material/Button'
 import setLogin from '../services/Login.service';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import { useNavigate } from 'react-router-dom'
-
-const Alert = forwardRef(function Alert(props, ref) {
-    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
+import SnackbarMessage from '../SnackbarMessage/SnackbarMessage';
 
 const Login = () => {
 
@@ -43,7 +38,7 @@ const Login = () => {
                     type: 'success'
                 })
                 localStorage.setItem('jwt', res.data.jwt);
-                navigate('/home')
+                navigate('/listado')
             })
             .catch( err => {
                 console.log("Hubo un error en la llamada: ", err)
@@ -82,12 +77,12 @@ const Login = () => {
             </label>
             <Button variant="outlined" type="submit">Ingresar</Button>
         </ValidatorForm>
-        <Snackbar open={status} autoHideDuration={6000} onClose={handleClose}>
-            <Alert onClose={handleClose} severity={type}>
-                {message}
-            </Alert>
-
-        </Snackbar>
+        <SnackbarMessage 
+        status={status}
+        handleClose={handleClose}
+        type={type}
+        message={message}
+        />
         </>
     )
 }
