@@ -15,7 +15,8 @@ const ListPage = () => {
            
             <CssBaseline />
             <Container className="general-container" style={{paddingTop: '60px'}}>
-                <Listado />
+                <Listado sortBy={'sort_by=popularity.desc'} titulo={'Más populares'} />
+                <Listado sortBy={'sort_by=vote_average'} titulo={'Mejor valoradas'}/>
             </Container>
         </div>
         )

@@ -8,7 +8,7 @@ import getMovies from "../services/Get.service";
 import { useState, useEffect } from 'react'
 import SnackbarMessage from "../SnackbarMessage/SnackbarMessage";
 
-const Listado = () => {
+const Listado = ({sortBy, titulo}) => {
 
     const [movies, setMovies] = useState([])
     const [showMessage, setShowMessage] = useState({
@@ -20,7 +20,7 @@ const Listado = () => {
     const { status, message, type } = showMessage
     
     useEffect( () => {
-        getMovies().then( (res) => {
+        getMovies(sortBy).then( (res) => {
                 setMovies(res.data.results)
             })
             .catch((err) => {
@@ -41,7 +41,7 @@ const Listado = () => {
     
     return(
         <div className="container-section-list">
-            <h1>Recomendaciones para ti</h1>
+            <h1>{titulo}</h1>
             <Swiper
                 slidesPerView={5}
                 spaceBetween={20}

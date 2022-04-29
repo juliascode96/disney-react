@@ -1,7 +1,7 @@
 import '../Styles/Header.css'
 
 import { useState } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import HomeIcon from '@mui/icons-material/Home';
 import SearchIcon from '@mui/icons-material/Search';
@@ -16,6 +16,7 @@ const Header = () => {
 
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
+    const navigate = useNavigate()
 
     const handleClick = (event) => {
       setAnchorEl(event.currentTarget);
@@ -25,6 +26,11 @@ const Header = () => {
       setAnchorEl(null);
     };
 
+    const logout = () => {
+        localStorage.removeItem('jwt')
+        navigate("/login")
+    }
+
     return(
         <header className='header-disney'>
             <div className='container-logo'>
@@ -32,7 +38,7 @@ const Header = () => {
             </div>
             <nav>
                 <ul>
-                    <li><Link to='/home'><HomeIcon fontSize={'large'}/> Inicio</Link></li>
+                    <li><Link to='/listado'><HomeIcon fontSize={'large'}/> Inicio</Link></li>
                     <li><Link to='/peliculas'><LocalMoviesIcon fontSize={'large'}/>Peliculas</Link></li>
                     <li><Link to='/series'><LiveTvIcon fontSize={'large'}/>Series</Link></li>
                     <li><Link to='/search'><SearchIcon fontSize={'large'}/>Busqueda</Link></li>
@@ -60,7 +66,7 @@ const Header = () => {
                 >
                     <MenuItem onClick={handleClose}>Profile</MenuItem>
                     <MenuItem onClick={handleClose}>My account</MenuItem>
-                    <MenuItem onClick={handleClose}>Logout</MenuItem>
+                    <MenuItem onClick={handleClose}><button onClick={logout}>Logout</button></MenuItem>
                 </Menu>
             </div>
         </header>

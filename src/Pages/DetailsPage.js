@@ -2,8 +2,9 @@ import { getMovie } from "../services/Get.service"
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import SnackbarMessage from "../SnackbarMessage/SnackbarMessage";
-import { useParams } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import '../Styles/Details.css'
 
 const DetailsPage = () => {
     const [movieInfo, setMovieInfo] = useState({})
@@ -14,6 +15,7 @@ const DetailsPage = () => {
     })
 
     const {status, message, type} = showMessage
+    let { id } = useParams();
 
     const handleClose = () => {
         setShowMessage({
@@ -23,7 +25,7 @@ const DetailsPage = () => {
     }
 
     useEffect( () => {
-        getMovie('508947')
+        getMovie(id)
         .then( (res) => {
             setMovieInfo(res.data)
         })
@@ -38,10 +40,14 @@ const DetailsPage = () => {
 
     return(
         <>
-        <CssBaseline />
+        {!localStorage.getItem('jwt') ? (<Navigate to='/login' />
+        ) : (
+            <>
+            <CssBaseline />
             <Container className="general-container" style={{paddingTop: '60px'}}>
-            <h1>Detalles</h1>
-            <h2>{movieInfo.original_title}</h2>
+            <h1>{movieInfo.original_title}</h1>
+            <img src={`https://image.tmdb.org/t/p/w500/${movieInfo.backdrop_path}`} alt="img movie"/>
+            <p>{movieInfo.overview}</p>
             </Container>
             <SnackbarMessage 
                 estado={status} 
@@ -49,7 +55,10 @@ const DetailsPage = () => {
                 handleClose={handleClose} 
                 message={message}
             />
-        </>
+            </>
+        )
+        }
+    </> 
     )
 }
 
