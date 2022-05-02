@@ -23,6 +23,10 @@
 
 }
 
+.App {
+    background: rgb(43, 48, 70);
+}
+
 .general-container {
     min-height: calc(100vh - 309px);
     width: 100%;
@@ -31,4 +35,8 @@
 
 p,a,span,h1,h2,h3,h4 {
     font-family: 'metropolisregular';
+}
+
+form {
+    background: white;
 }

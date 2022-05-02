@@ -1,9 +1,12 @@
 import Login from "./Components/Login";
 import AppRouter from './Components/Router/AppRouter';
+import './Styles/Layout.css'
 
 function App() {
   return (
-   <AppRouter />
+  <div className="App">
+    <AppRouter />
+  </div>
   );
 }
 
