@@ -11,5 +11,13 @@ const getMovie = (id) => {
     return axios.get(`${baseUrl}movie/${id}?api_key=${apiKey}&language=es-ES`)
 }
 
+const getSearchResults = (query) => {
+    return axios.get(`${baseUrl}search/movie?api_key=${apiKey}&query=${query}&page=1&language=es-ES`)
+}
+
+const getTrending = () => {
+    return axios.get(`${baseUrl}trending/all/day?api_key=${apiKey}&language=es-ES`)
+}
+
 export default getMovies
-export { getMovie }
+export { getMovie, getSearchResults, getTrending } 
